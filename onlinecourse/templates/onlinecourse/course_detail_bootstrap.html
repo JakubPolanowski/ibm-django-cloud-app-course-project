@@ -92,7 +92,11 @@
       </button>
       <br />
       <div id="exam" class="collapse">
-        <form action="" method="POST" id="questionform">
+        <form
+          action="{% url 'onlinecourse:submit' course.id %}"
+          method="POST"
+          id="questionform"
+        >
           {% for question in course.question_set.all %}
           <div class="card mt-3">
             <div class="card-header">
