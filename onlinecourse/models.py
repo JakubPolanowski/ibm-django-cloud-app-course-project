@@ -130,7 +130,12 @@ class Question(models.Model):
     # Choice content
     # Indicate if this choice of the question is a correct one or not
     # Other fields and methods you would like to design
-# class Choice(models.Model):
+class Choice(models.Model):
+
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    choice_text = models.TextField()
+    is_correct = models.BooleanField()
 
 # <HINT> The submission model
 # One enrollment could have multiple submission
