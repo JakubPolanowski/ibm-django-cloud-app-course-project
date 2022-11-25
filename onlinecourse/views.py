@@ -122,7 +122,7 @@ def submit(request, course_id):
     submission.choices.set(choices)
 
     return HttpResponseRedirect(reverse(
-        viewname="onlinecourse:exam_result",
+        viewname="onlinecourse:show_exam_result",
         args=(course_id, submission.id)
     ))
 
