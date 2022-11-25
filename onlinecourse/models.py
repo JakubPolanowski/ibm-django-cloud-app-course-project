@@ -113,6 +113,12 @@ class Question(models.Model):
         validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
     )
 
+    def is_get_score(self, selected_ids) -> bool:
+        # returns if answer is true
+        return self.choice_set.filter(is_correct=True).count() == \
+            self.choice_set.filter(
+                is_correct=True, id__in=selected_ids).count()
+
     # def is_get_score(self, selected_ids):
 
     # <HINT> A sample model method to calculate if learner get the score of the question
