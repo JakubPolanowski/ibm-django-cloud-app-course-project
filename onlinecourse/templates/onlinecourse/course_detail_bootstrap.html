@@ -91,9 +91,32 @@
         Toggle Exam
       </button>
       <br />
-      <br />
       <div id="exam" class="collapse">
-        Click to expand elements within the collapse div
+        <form action="" method="POST" id="questionform">
+          {% for question in course.question_set.all %}
+          <div class="card mt-3">
+            <div class="card-header">
+              <h5>{{question.question_text}}</h5>
+            </div>
+            {% csrf_token %}
+            <div>
+              {% for choice in question.choice_set.all %}
+              <div class="form-check">
+                <label class="form-check-label pl-2">
+                  <input
+                    type="checkbox"
+                    name="choice_{{choice.id}}"
+                    id="{{choice.id}}"
+                    class="form-check-input"
+                    value="{{choice.id}}"
+                  />{{ choice.choice_text}}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </form>
       </div>
 
       {% endif %}
