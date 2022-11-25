@@ -150,7 +150,7 @@ def show_exam_result(request, course_id, submission_id):
     choices = submission.choices.all()
 
     total_score = sum(
-        [choice.question.grade for choice in choices if choice.is_correct]
+        [choice.question_id.grade for choice in choices if choice.is_correct]
     ) / len(choices) * 100
 
     return render(
