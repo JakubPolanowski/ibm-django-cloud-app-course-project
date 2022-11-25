@@ -149,11 +149,14 @@ def show_exam_result(request, course_id, submission_id):
     submission = Submission.objects.get(id=submission_id)
     choices = submission.choices.all()
 
-    total_score = sum(
-        [choice.question_id.is_get_score([choice.pk])
-         for choice in choices if choice.is_correct]
-    ) / len(choices) * 100
-    total_score = int(total_score)
+    try:
+        total_score = sum(
+            [choice.question_id.is_get_score([choice.pk])
+             for choice in choices if choice.is_correct]
+        ) / len(choices) * 100
+        total_score = int(total_score)
+    except ZeroDivisionError:
+        total_score = 0
 
     return render(
         request,
