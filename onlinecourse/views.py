@@ -152,6 +152,7 @@ def show_exam_result(request, course_id, submission_id):
     total_score = sum(
         [choice.question_id.grade for choice in choices if choice.is_correct]
     ) / len(choices) * 100
+    total_score = int(total_score)
 
     return render(
         request,
