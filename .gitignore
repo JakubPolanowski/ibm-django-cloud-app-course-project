@@ -287,3 +287,6 @@ final_template.zip
 
 # Ignore vscode
 .vscode
+
+# Ignore the Sqlite3 database
+*.sqlite3
