@@ -1,12 +1,8 @@
 import sys
 from django.utils.timezone import now
-try:
-    from django.db import models
-except Exception:
-    print("There was an error loading django modules. Do you have django installed?")
-    sys.exit()
-
+from django.db import models
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 import uuid
 
 
@@ -103,10 +99,20 @@ class Enrollment(models.Model):
     # Has a grade point for each question
     # Has question content
     # Other fields and methods you would like to design
-# class Question(models.Model):
+class Question(models.Model):
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
     # Foreign key to lesson
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     # question text
+    question_text = models.TextField()
     # question grade/mark
+    grade = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
+    )
+
+    # def is_get_score(self, selected_ids):
 
     # <HINT> A sample model method to calculate if learner get the score of the question
     # def is_get_score(self, selected_ids):
